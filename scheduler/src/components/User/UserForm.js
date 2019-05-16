@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+import { Button, FormGroup, Label, CustomInput, Input, FormText} from 'reactstrap';
+
+
 
 class UserForm extends Component {
     
@@ -8,7 +10,7 @@ class UserForm extends Component {
     super();
     this.state = {
       title: 'Simple CRUD app',
-      // users: [],
+      users: [],
     }
   }
 
@@ -74,9 +76,10 @@ class UserForm extends Component {
       res.json() 
       .then((data) => {
         //console.log(data)
-
+        //if we want to print out users here
         //we now have the data
         let users = this.state.users;
+        console.log("Here are the users" + users);
         users.push(user_data);
 
         this.setState({
@@ -142,6 +145,18 @@ class UserForm extends Component {
 
        <p>E-mail</p>
        <input type="email" ref="email"></input><br /><br />
+
+       {/* <FormGroup>
+          <Label for="exampleFile">File</Label>
+          <Input type="file" name="file" id="exampleFile" />
+          <FormText color="muted">
+            This is some placeholder block-level help text for the above input.
+            It's a bit lighter and easily wraps to a new line.
+          </FormText>
+        </FormGroup> */}
+
+
+      
 
        <button onClick={this.addUser.bind(this)}> Add </button> <br /><br />
 

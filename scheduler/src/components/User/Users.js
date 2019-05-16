@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+import { Button, Table } from 'reactstrap';
 
 class Users extends Component {
 
@@ -24,12 +24,40 @@ class Users extends Component {
     })
   }
 
+  removeItem(id){
+    console.log(this);
+    let users = this.state.users;
+
+    let user = users.find(item => {
+      return item.id === id
+    })
+    console.log(user);
+
+    const req = new Request('http://localhost:3001/api/users/remove/' + id,{
+      method: 'DELETE'  
+  });
+
+  fetch(req)
+  .then(res => {
+    res.json()
+     .then(data => {
+       alert('User removed');
+      //  users.splice(user, 1);
+      //  this.setState({
+      //    users: users
+      //  })
+      // console.log('success' + data);
+     })
+  })
+}
+ 
+
     render() {
         return (
         <div>
             <Button color="danger" href="/">Home</Button>
             {/* <pre>{JSON.stringify(this.state.users)}</pre>      */}
-            <table>
+            <Table>
                 <thead>
                     <tr>
                      <th>First Name</th>
@@ -39,12 +67,14 @@ class Users extends Component {
                      <th>Title</th>
                      <th>Start Date</th>
                      <th>Email</th>
+                     <th>Action</th>
                     </tr>
                 </thead>
                 
-             <tbody>{this.state.users.map(function(item, key) {         
+             <tbody>{this.state.users.map( item => {   //replaced function(item){} with item=>
+              // console.log(item.id);      
                return (
-                  <tr key = {key}>
+                  <tr key={item.id}>
                       <td>{item.FirstName}</td>
                       <td>{item.LastName}</td>
                       <td>{item.Team}</td>
@@ -52,12 +82,14 @@ class Users extends Component {
                       <td>{item.Title}</td>
                       <td>{item.StartDate}</td>
                       <td>{item.email}</td>
+                      <td><button onClick={() => this.removeItem(item.id)}>Del</button></td>
+                      
                   </tr>
                   )      
                 }
               )}
              </tbody>
-            </table>
+            </Table>
         </div>
         );
     }

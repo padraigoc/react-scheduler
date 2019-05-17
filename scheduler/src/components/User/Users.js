@@ -10,7 +10,7 @@ class Users extends Component {
         }
       }
 
-    //make AJAX calls here
+  //make AJAX calls here
   componentDidMount(){
     console.log('Component has mounted');
     fetch('http://localhost:3001/api/users')
@@ -41,22 +41,18 @@ class Users extends Component {
   .then(res => {
     res.json()
      .then(data => {
-       alert('User removed');
-      //  users.splice(user, 1);
-      //  this.setState({
-      //    users: users
-      //  })
-      // console.log('success' + data);
+    const updatedItems = this.state.users.filter(item => item.id !== id)
+    this.setState({ users: updatedItems })
+
+    alert('User removed');
      })
   })
 }
  
-
     render() {
         return (
         <div>
             <Button color="danger" href="/">Home</Button>
-            {/* <pre>{JSON.stringify(this.state.users)}</pre>      */}
             <Table>
                 <thead>
                     <tr>
@@ -71,8 +67,7 @@ class Users extends Component {
                     </tr>
                 </thead>
                 
-             <tbody>{this.state.users.map( item => {   //replaced function(item){} with item=>
-              // console.log(item.id);      
+             <tbody>{this.state.users.map(item => { 
                return (
                   <tr key={item.id}>
                       <td>{item.FirstName}</td>
@@ -82,8 +77,8 @@ class Users extends Component {
                       <td>{item.Title}</td>
                       <td>{item.StartDate}</td>
                       <td>{item.email}</td>
-                      <td><button onClick={() => this.removeItem(item.id)}>Del</button></td>
-                      
+                      <td><Button color="danger" onClick={() => this.removeItem(item.id)}> Delete </Button>        
+                      {' '}<Button color="danger" color="info"> Edit </Button></td>     
                   </tr>
                   )      
                 }

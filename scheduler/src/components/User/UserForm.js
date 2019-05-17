@@ -18,24 +18,11 @@ class UserForm extends Component {
   componentDidMount(){
     console.log('Component has mounted');
 
-    // fetch('http://localhost:3001/api/users')
-    // .then((res) => {
-    //   res.json()
-    //   .then((data) => {
-    //     // console.log(data);
-    //     // let users = this.state.users;
-    //     // users.push(data);
-    //     this.setState({
-    //       users: data
-    //     })
-    //   })
-    // })
   }
 
   addUser(event) {
     event.preventDefault();//prevents spinning
-
-    console.log("Button clicked");
+   // console.log("Button clicked");
 
     let user_data = {
       first_name : this.refs.user_name.value,
@@ -80,17 +67,17 @@ class UserForm extends Component {
         //we now have the data
         let users = this.state.users;
         console.log("Here are the users" + users);
-        users.push(user_data);
 
+        users.push(user_data);
         this.setState({
           users: users
         })
       })
     })
+
     .catch((err) => {
       console.log(err);
     })
-    alert("User Added")
     this.refs.user_name.value = ""
     this.refs.user_last_name.value = ""
     this.refs.locationName.value = ""
@@ -98,6 +85,7 @@ class UserForm extends Component {
     this.refs.title.value = ""
     this.refs.startDate.value = ""
     this.refs.email.value = ""
+    alert("User Added")
   }
   }
 
@@ -145,19 +133,7 @@ class UserForm extends Component {
 
        <p>E-mail</p>
        <input type="email" ref="email"></input><br /><br />
-
-       {/* <FormGroup>
-          <Label for="exampleFile">File</Label>
-          <Input type="file" name="file" id="exampleFile" />
-          <FormText color="muted">
-            This is some placeholder block-level help text for the above input.
-            It's a bit lighter and easily wraps to a new line.
-          </FormText>
-        </FormGroup> */}
-
-
       
-
        <button onClick={this.addUser.bind(this)}> Add </button> <br /><br />
 
        <Button color="danger" href="/">Home</Button>

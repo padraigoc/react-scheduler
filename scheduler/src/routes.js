@@ -8,7 +8,6 @@ import Calendar from './components/Calendar';
 
 class Routes extends Component {
 
-    //getting users
     constructor(props) {
         super(props);
         this.state = {
@@ -17,7 +16,7 @@ class Routes extends Component {
       }
     
       componentDidMount(){
-        console.log('Component has mounted');
+      //  console.log('Component has mounted');
         fetch('http://localhost:3001/api/users')
         .then((res) => {
           res.json()

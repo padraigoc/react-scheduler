@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Table } from 'reactstrap';
+import { FormGroup, Label, Input, Button, Table } from 'reactstrap';
 
 
 class Users extends Component {
@@ -7,7 +7,8 @@ class Users extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: []
+      users: [],
+      query: ''
     }
   }
 
@@ -38,7 +39,33 @@ class Users extends Component {
     render() {
         return (
         <div>
-            <Button color="danger" href="/">Home</Button>
+            <Button color="danger" href="/">Home</Button><br /><br />
+
+            <FormGroup>
+          <Label for="exampleSearch">Search</Label>
+          <Input
+            type="search"
+            name="search"
+            id="exampleSearch"
+            placeholder="search by first name"
+            onChange={this.searchHandler}
+          />
+        </FormGroup>
+
+        <br />
+
+            <FormGroup>
+          <Label for="exampleSelect">Team</Label>
+          <Input type="select" name="select" id="exampleSelect" onChange={this.teamChange}>
+            <option>Please Select..</option>
+            <option>Enterprise</option>
+            <option>Billing</option>
+            <option>Technical</option>
+            <option>Night Team</option>
+            <option>Leadership</option>
+          </Input>
+        </FormGroup>
+
             <Table>
                 <thead>
                     <tr>

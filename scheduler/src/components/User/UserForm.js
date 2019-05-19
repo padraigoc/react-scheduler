@@ -10,17 +10,15 @@ class UserForm extends Component {
   constructor() {
     super();
     this.state = {
-      title: 'Simple CRUD app',
+      title: 'Add new user',
     //  users: [],
     }
   }
-  
   
 
   //make AJAX calls here
   componentDidMount(){
     console.log('Component has mounted');
-
   }
 
   addUser(event) {
@@ -36,21 +34,23 @@ class UserForm extends Component {
       email: this.refs.email.value
     }
 
-    if(user_data.first_name === ""){
-      alert("Please enter a first name")
-    } else if(user_data.last_name === "") {
-      alert("Please enter a last name") 
-    }  else if(user_data.location === "") {
-      alert("Please enter a location")
-    }  else if(user_data.pod === "") {
-      alert("Please enter a Team")
-    }  else if(user_data.title === "") {
-      alert("Please enter a Title")
-    }  else if(user_data.startDate === "") {
-      alert("Please enter a Start Date")
-    }  else if(user_data.email === "") {
-      alert("Please enter an E-mail")
-    } else {
+    //error handling for form - temp disabled 
+
+    // if(user_data.first_name === ""){
+    //   alert("Please enter a first name")
+    // } else if(user_data.last_name === "") {
+    //   alert("Please enter a last name") 
+    // }  else if(user_data.location === "") {
+    //   alert("Please enter a location")
+    // }  else if(user_data.pod === "") {
+    //   alert("Please enter a Team")
+    // }  else if(user_data.title === "") {
+    //   alert("Please enter a Title")
+    // }  else if(user_data.startDate === "") {
+    //   alert("Please enter a Start Date")
+    // }  else if(user_data.email === "") {
+    //   alert("Please enter an E-mail")
+    // } else {
   
     //build out request
     var req = new Request('http://localhost:3001/api/new-user', {
@@ -75,7 +75,7 @@ class UserForm extends Component {
         // this.setState({
         //   users: users
         // })
-        
+
       })
     })
 
@@ -91,7 +91,7 @@ class UserForm extends Component {
     this.refs.email.value = ""
     alert("User Added")
   }
-  }
+  //}
 
   render() {
     let title = this.state.title;
@@ -111,14 +111,14 @@ class UserForm extends Component {
          <option value="Mexico">Mexico</option>
        </select><br /><br />
 
-       <p>Pod</p>
+       <p>Team</p>
        <select ref="teamName" form="teamForm">
          <option value=""> -- Please Select -- </option>
-         <option value="enterpriseTeam">Enterprise</option>
-         <option value="billing">Billing</option>
-         <option value="technical">Technical</option>
-         <option value="technical">Night Team</option>
-         <option value="leadershipTeam">Leadership</option>
+         <option value="Enterprise Team">Enterprise</option>
+         <option value="Billing">Billing</option>
+         <option value="Technical">Technical</option>
+         <option value="Night Team">Night Team</option>
+         <option value="Leadership Team">Leadership</option>
        </select><br /><br />
 
        <p>Title</p>
@@ -128,8 +128,8 @@ class UserForm extends Component {
          <option value="Billing Advocate">Billing Advocate</option>
          <option value="Technical Advocate">Technical Advocate</option>
          <option value="Night Team Advocate">Night Team Advocate</option>
-         <option value="TeamLead">Team Lead</option>
-         <option value="ledership">Leadership</option>
+         <option value="Team Lead">Team Lead</option>
+         <option value="Ledership">Leadership</option>
        </select><br /><br />
 
        <p>Start Date</p>

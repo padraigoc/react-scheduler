@@ -3,6 +3,7 @@ import { Button, FormGroup, Label, CustomInput, Input, FormText} from 'reactstra
 
 
 
+
 class UserForm extends Component {
     
   //ES6
@@ -10,9 +11,11 @@ class UserForm extends Component {
     super();
     this.state = {
       title: 'Simple CRUD app',
-      users: [],
+    //  users: [],
     }
   }
+  
+  
 
   //make AJAX calls here
   componentDidMount(){
@@ -22,7 +25,6 @@ class UserForm extends Component {
 
   addUser(event) {
     event.preventDefault();//prevents spinning
-   // console.log("Button clicked");
 
     let user_data = {
       first_name : this.refs.user_name.value,
@@ -65,13 +67,15 @@ class UserForm extends Component {
         //console.log(data)
         //if we want to print out users here
         //we now have the data
-        let users = this.state.users;
-        console.log("Here are the users" + users);
+        
+        // let users = this.state.users;
+        // console.log("Here are the users" + users);
 
-        users.push(user_data);
-        this.setState({
-          users: users
-        })
+        // users.push(user_data);
+        // this.setState({
+        //   users: users
+        // })
+        
       })
     })
 
@@ -120,10 +124,10 @@ class UserForm extends Component {
        <p>Title</p>
        <select ref="title" form="titleForm">
          <option value=""> -- Please Select -- </option>
-         <option value="EnterpriseAdvocate">Enterprise Advocate</option>
-         <option value="BillingAdvocate">Billing Advocate</option>
-         <option value="TechnicalAdvocate">Technical Advocate</option>
-         <option value="NightTeamAdvocate">Night Team Advocate</option>
+         <option value="Enterprise Advocate">Enterprise Advocate</option>
+         <option value="Billing Advocate">Billing Advocate</option>
+         <option value="Technical Advocate">Technical Advocate</option>
+         <option value="Night Team Advocate">Night Team Advocate</option>
          <option value="TeamLead">Team Lead</option>
          <option value="ledership">Leadership</option>
        </select><br /><br />

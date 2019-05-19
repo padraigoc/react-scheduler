@@ -1,26 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button } from 'reactstrap';
 
-class test extends Component {
 
-    componentDidMount(){
-
-    }
-
-    
-    render() {
-        return (
-            <div>
-           
-     
+const index = (props) => {
+    return (
+        <div>
         <Button color="danger" href="/users/new">Add User</Button><br/><br/>
         <Button color="danger" href="/users">View Users</Button><br/><br/>
         <Button color="danger" href="/calendar">View Calendar</Button><br/>  
-    
-                
-            </div>
-        );
-    }
-}
+        </div>
 
-export default test;
+        
+
+        
+    );
+};
+
+export default index;

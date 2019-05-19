@@ -4,8 +4,11 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "interactjs": "^1.4.1",
+    "moment": "^2.24.0",
     "multer": "^1.4.1",
     "react": "^16.8.6",
+    "react-calendar-timeline": "^0.25.1",
     "react-dom": "^16.8.6",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
@@ -32,5 +35,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {}
 }

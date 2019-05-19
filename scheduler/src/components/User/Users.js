@@ -1,49 +1,35 @@
 import React, { Component } from 'react';
 import { Button, Table } from 'reactstrap';
 
+
 class Users extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-          users: [],
-        }
-      }
-
-  //make AJAX calls here
-  componentDidMount(){
-    console.log('Component has mounted');
-    fetch('http://localhost:3001/api/users')
-    .then((res) => {
-      res.json()
-      .then((data) => {
-        this.setState({
-          users: data
-        })
-      })
-    })
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: []
+    }
   }
 
+  //https://hackernoon.com/common-pitfall-in-initialising-state-based-on-props-in-react-js-d56795a944aa
+  componentWillReceiveProps(nextProps){
+    if(nextProps.users !== this.props.users){
+        this.setState({users:nextProps.users});
+    }
+}
+
   removeItem(id){
-    console.log(this);
-    let users = this.state.users;
-
-    let user = users.find(item => {
-      return item.id === id
-    })
-    console.log(user);
-
     const req = new Request('http://localhost:3001/api/users/remove/' + id,{
       method: 'DELETE'  
   });
-
   fetch(req)
   .then(res => {
     res.json()
      .then(data => {
+       //replace this.state.users with this.props.user as we're passing down state from routes
     const updatedItems = this.state.users.filter(item => item.id !== id)
+    console.log("Updated users" + updatedItems )
     this.setState({ users: updatedItems })
-
     alert('User removed');
      })
   })

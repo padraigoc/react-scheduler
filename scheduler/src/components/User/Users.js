@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
 import { FormGroup, Label, Input, Button, Table } from 'reactstrap';
 
+function searchingFor(term){
+  return function(user){
+   // search by first name
+   // return user.FirstName.toLowerCase().includes(term.toLowerCase()) || !term;
+
+   //search by team
+   return user.Team.toLowerCase().includes(term.toLowerCase()) || !term;
+  }
+}
+
 
 class Users extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       users: [],
-      query: ''
+      term: '',
     }
+    this.searchHandler = this.searchHandler.bind(this);
+  //  this.searchNameHandler = this.searchNameHandler.bind(this);
   }
 
   //https://hackernoon.com/common-pitfall-in-initialising-state-based-on-props-in-react-js-d56795a944aa
@@ -35,36 +46,51 @@ class Users extends Component {
      })
   })
 }
- 
+
+searchHandler(event){
+  this.setState({
+    term: event.target.value
+  })
+}
+
     render() {
         return (
         <div>
             <Button color="danger" href="/">Home</Button><br /><br />
 
+            {/* <FormGroup>
+              <Label for="searchingByName">Search by Name..</Label>
+              <Input
+              type="search"
+              name="search"
+              id="searchingByName"
+              placeholder="Search by First Name"
+              onChange={this.searchTeamHandler}
+              />
+            </FormGroup><br /> */}
+            
             <FormGroup>
-          <Label for="exampleSearch">Search</Label>
-          <Input
-            type="search"
-            name="search"
-            id="exampleSearch"
-            placeholder="search by first name"
-            onChange={this.searchHandler}
-          />
-        </FormGroup>
-
-        <br />
+              <Label for="searchingTeamName">Search (Currently searching by team)</Label>
+              <Input
+              type="search"
+              name="search"
+              id="searchingTeamName"
+              placeholder="Enter a team name"
+              onChange={this.searchHandler}
+              />
+            </FormGroup><br />
 
             <FormGroup>
-          <Label for="exampleSelect">Team</Label>
-          <Input type="select" name="select" id="exampleSelect" onChange={this.teamChange}>
-            <option>Please Select..</option>
-            <option>Enterprise</option>
-            <option>Billing</option>
-            <option>Technical</option>
-            <option>Night Team</option>
-            <option>Leadership</option>
-          </Input>
-        </FormGroup>
+              <Label for="exampleSelect">Team</Label>
+              <Input type="select" name="select" id="exampleSelect" onChange={this.searchHandler}>
+                <option>All Members</option>
+                <option>Enterprise</option>
+                <option>Billing</option>
+                <option>Technical</option>
+                <option>Night Team</option>
+                <option>Leadership</option>
+             </Input>
+           </FormGroup>
 
             <Table>
                 <thead>
@@ -80,7 +106,8 @@ class Users extends Component {
                     </tr>
                 </thead>
                 
-             <tbody>{this.state.users.map(item => { 
+             <tbody>            
+               {this.state.users.filter(searchingFor(this.state.term)).map(item => { 
                return (
                   <tr key={item.id}>
                       <td>{item.FirstName}</td>
